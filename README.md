@@ -38,9 +38,4 @@ Genreally, the accuracy of image classification algorithms suffers at high frame
 
 ## TODO
 
-- [ ] Confirm 30 FPS is stable for hours. (count number of frames collected every second? )
-50* 340* 340 * 60 * 60 * 24 * 1 byte == 42440 bytes
-less than 1 MB video data
-plot frames collected for every second? 
-or number of seconds 
-pie chart enough?
+- [ ] Confirm 30 FPS is stable for 24 hours. (ESP32 calculates framerate. Send framerate in UDP header to the server and count frames received on server. Plot both as time series, will show when something is a framerate issue or a network issue. Can also create pie chart to show how often FPS dips below 30.)
