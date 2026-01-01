@@ -38,4 +38,9 @@ Genreally, the accuracy of image classification algorithms suffers at high frame
 
 ## TODO
 
-- [ ] Confirm 30 FPS is maintainable over multiple hours.
+- [ ] Confirm 30 FPS is stable for hours. (count number of frames collected every second? )
+50* 340* 340 * 60 * 60 * 24 * 1 byte == 42440 bytes
+less than 1 MB video data
+plot frames collected for every second? 
+or number of seconds 
+pie chart enough?
