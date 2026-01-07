@@ -22,6 +22,8 @@ Using ESP32-CAM (<$10) cameras as input.
 
 ### Real Time
 
+![Graph of sent and received FPS](imgs/fps_comp_graph.png "Graph of sent and received FPS")
+
 By using very low resolutions, grayscale colorspace, and by disabling JPEG compression on the ESP32-CAM (and instead sending raw image sensor data over WiFi), the ESP32-CAM can achieve FPS as high as 50 frames per second. Even with a 30% frame loss due to sampling errors and whatever sources, a stable framerate of 30 FPS feels achievable, which is enough for real time hand gesture capture.
 
 On the networking side, using a dedicated 2.4Ghz network avoids signal noise from other devices when transmitting images.
@@ -38,4 +40,9 @@ Genreally, the accuracy of image classification algorithms suffers at high frame
 
 ## TODO
 
-- [ ] Confirm 30 FPS is stable for 24 hours. (ESP32 calculates framerate. Send framerate in UDP header to the server and count frames received on server. Plot both as time series, will show when something is a framerate issue or a network issue. Can also create pie chart to show how often FPS dips below 30.)
+- [ ] Implement FastYOLO (or mediapipe) hands into prototype
+
+- [ ] Further optimize FPS
+
+- [X] Confirm 30 FPS is stable for 24 hours. (ESP32 calculates framerate. Send framerate in UDP header to the 
+server and count frames received on server. Plot both as time series, will show when something is a framerate issue or a network issue. Can also create pie chart to show how often FPS dips below 30.)
