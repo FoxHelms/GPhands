@@ -1,6 +1,9 @@
 # GPhands - General Purpose hands
 computer vision based hand gesture system for general purpose computer control.
 
+![Demo of simple tap controlled game](imgs/demo_gif_small.gif "Demo of simple tap controlled game")
+
+
 ## Overview
 
 A low cost, scalable, real time system that accurately captures hand gestures––taps, pinches, twists, etc––as computer input. 
