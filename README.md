@@ -19,6 +19,20 @@ Being general purpose, the use cases of this system are only bound by the imagin
 
 ## Details
 
+
+### Training Data
+
+![Example frame transmitted by ESP32](imgs/hand_4.png "Example frame transmitted by ESP32")
+
+Above is an example of a frame transmitted by the ESP32-Cam, with a `frame_id` overlaid in green. Consider this the input image for the 
+FastYOLO model. 
+
+As you can see, our model needs to determine hand landmarks with very low resolution data as input. To fine tune the model for this, we 
+will augment public hand datasets with synthetic data. 
+
+The goal for the synthetic data is to resemble the above image as closely as possible, with the added benenfit of being automatically 
+annotated. 
+
 ### Low Cost
 
 Using ESP32-CAM (<$10) cameras as input. 
@@ -40,6 +54,7 @@ ESP32-CAMs are low power and WiFi compatible, which allows them to be extremely 
 ### Accurate
 
 Genreally, the accuracy of image classification algorithms suffers at high framerates and low resolutions. This system will compensate by using multiple cameras for redundancy and creating custom, sensor-specific training datasets in Blender to optimize the YOLO model.
+
 
 ## TODO
 
