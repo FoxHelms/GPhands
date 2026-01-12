@@ -24,11 +24,15 @@ Being general purpose, the use cases of this system are only bound by the imagin
 
 ![Example frame transmitted by ESP32](imgs/hand_4.png "Example frame transmitted by ESP32")
 
+
+
 Above is an example of a frame transmitted by the ESP32-Cam, with a `frame_id` overlaid in green. Consider this the input image for the 
 FastYOLO model. 
 
 As you can see, our model needs to determine hand landmarks with very low resolution data as input. To fine tune the model for this, we 
 will augment public hand datasets with synthetic data. 
+
+!["Synthetic training data with rough bounding box"](imgs/synthetic_sample_bounding_box.png "Synthetic training data with rough bounding box")
 
 The goal for the synthetic data is to resemble the above image as closely as possible, with the added benenfit of being automatically 
 annotated. 
