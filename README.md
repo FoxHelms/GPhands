@@ -1,45 +1,53 @@
 # GPhands - General Purpose hands
+
 computer vision based hand gesture system for general purpose computer control.
 
 ![Demo of simple tap controlled game](imgs/demo_gif_small.gif "Demo of simple tap controlled game")
 
-
 ## Overview
 
-A low cost, scalable, real time system that accurately captures hand gestures––taps, pinches, twists, etc––as computer input. 
+A low cost, scalable, real time system that accurately captures hand gestures––taps, pinches, twists, etc––as computer input.
 
 ## Use Cases
 
 Being general purpose, the use cases of this system are only bound by the imagination. Here are some examples:
 
-* Light control - tap fingers to turn light fixture on/off. Pinch and twist to dim.
-* Speaker control - tap fingers to pause/play media, pinch and twist to dim.
-* Games - tap to play flappy bird, point and shoot with finger gun
-* Social media control - swipe to scoll Instagram, Tiktok. Tap fingers to like
+- Light control - tap fingers to turn light fixture on/off. Pinch and twist to dim.
+- Speaker control - tap fingers to pause/play media, pinch and twist to dim.
+- Games - tap to play flappy bird, point and shoot with finger gun
+- Social media control - swipe to scoll Instagram, Tiktok. Tap fingers to like
 
 ## Details
 
+### Custom CNN
+
+![Bounding Box Comparison](imgs/bounding_box_comparison.png "Bounding Box Comparison")
+
+Accurately generating the bounding box for the hand remains an open engineering question in this project.
+
+The fastest, yet least accurate, way to get a bounding box is to average the corners of the mesh's bounding box within Blender (image 1). This obviously reduces accuracy because parts of the wrist and arm are included in the box, and the entire box is padded if the mesh has any rotation applied to it.
+
+As far as hand gesture recognition goes, Google has a monopoly on classification and regression models. Even models like YOLO use MediaPipe to label their own training data. While accurate and fast (image 3), MediaPipe has significant overhead which could be a problem for the embedded nature of this system.
+
+To avoid vendor lockin and improve accuracy, a custom hand classification and regression CNN was trained (image 2). The current prototype of the model was only trained for 30 epochs, yet it already shows more promise than the Blender approach.
+
+This model will be fine tuned and trained over increasing epochs, and it will likely match or surprass MediaPipe accuracy. As more custom and synthetic data is created (see below), the GPhands model will be accurate, real-time, and completely independent of MediaPipe / YOLO data and models.
 
 ### Training Data
 
 ![Example frame transmitted by ESP32](imgs/hand_4.png "Example frame transmitted by ESP32")
 
+Above is an example of a frame transmitted by the ESP32-Cam, with a `frame_id` overlaid in green. Consider this the input image for the
+FastYOLO model.
 
+As you can see, our model needs to determine hand landmarks with very low resolution data as input. To fine tune the model for this, we
+will augment public hand datasets with synthetic data.
 
-Above is an example of a frame transmitted by the ESP32-Cam, with a `frame_id` overlaid in green. Consider this the input image for the 
-FastYOLO model. 
-
-As you can see, our model needs to determine hand landmarks with very low resolution data as input. To fine tune the model for this, we 
-will augment public hand datasets with synthetic data. 
-
-!["Synthetic training data with rough bounding box"](imgs/synthetic_sample_bounding_box.png "Synthetic training data with rough bounding box")
-
-The goal for the synthetic data is to resemble the above image as closely as possible, with the added benenfit of being automatically 
-annotated. 
+The goal for the synthetic data is to resemble the above image as closely as possible, with the added benenfit of being automatically annotated.
 
 ### Low Cost
 
-Using ESP32-CAM (<$10) cameras as input. 
+Using ESP32-CAM (<$10) cameras as input.
 
 ### Real Time
 
@@ -59,12 +67,11 @@ ESP32-CAMs are low power and WiFi compatible, which allows them to be extremely 
 
 Genreally, the accuracy of image classification algorithms suffers at high framerates and low resolutions. This system will compensate by using multiple cameras for redundancy and creating custom, sensor-specific training datasets in Blender to optimize the YOLO model.
 
-
 ## TODO
 
 - [ ] Implement FastYOLO (or mediapipe) hands into prototype
 
-- [X] Further optimize FPS
+- [x] Further optimize FPS
 
-- [X] Confirm 30 FPS is stable for 24 hours. (ESP32 calculates framerate. Send framerate in UDP header to the 
-server and count frames received on server. Plot both as time series, will show when something is a framerate issue or a network issue. Can also create pie chart to show how often FPS dips below 30.)
+- [x] Confirm 30 FPS is stable for 24 hours. (ESP32 calculates framerate. Send framerate in UDP header to the
+      server and count frames received on server. Plot both as time series, will show when something is a framerate issue or a network issue. Can also create pie chart to show how often FPS dips below 30.)
