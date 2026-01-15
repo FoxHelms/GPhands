@@ -23,6 +23,12 @@ Being general purpose, the use cases of this system are only bound by the imagin
 
 ![Bounding Box Comparison](imgs/bounding_box_comparison.png "Bounding Box Comparison")
 
+**GPhands CNN Validation**
+
+| Epochs | Validation Loss | Mean IoU |
+| ------ | --------------- | -------- |
+| 30     | 0.0053          | 0.1752   |
+
 Accurately generating the bounding box for the hand remains an open engineering question in this project.
 
 The fastest, yet least accurate, way to get a bounding box is to average the corners of the mesh's bounding box within Blender (image 1). This obviously reduces accuracy because parts of the wrist and arm are included in the box, and the entire box is padded if the mesh has any rotation applied to it.
