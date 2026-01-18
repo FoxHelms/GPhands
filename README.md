@@ -28,6 +28,7 @@ Being general purpose, the use cases of this system are only bound by the imagin
 | Epochs | Validation Loss | Mean IoU |
 | ------ | --------------- | -------- |
 | 30     | 0.0053          | 0.1752   |
+| 60     | 0.0015          | 0.2347   |
 
 Accurately generating the bounding box for the hand remains an open engineering question in this project.
 
