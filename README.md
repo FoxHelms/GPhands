@@ -75,9 +75,13 @@ Genreally, the accuracy of image classification algorithms suffers at high frame
 
 ## TODO
 
+![Plot of displayed frames](imgs/frames_displayed_1.png "Plot of displayed frames")
+
+The focus of this branch is to get this plot of complete frames displayed per second as close to 50 fps as possible
+
 - [ ] Implement FastYOLO (or mediapipe) hands into prototype
 
-- [x] Further optimize FPS
+- [ ] Further optimize FPS
 
 - [x] Confirm 30 FPS is stable for 24 hours. (ESP32 calculates framerate. Send framerate in UDP header to the
       server and count frames received on server. Plot both as time series, will show when something is a framerate issue or a network issue. Can also create pie chart to show how often FPS dips below 30.)
